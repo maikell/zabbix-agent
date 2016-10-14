@@ -1,0 +1,3 @@
+server                          ansible_port=2222 ansible_host=127.0.0.1 ansible_user=vagrant
+client1                         ansible_port=6666 ansible_host=127.0.0.1 ansible_user=vagrant
+

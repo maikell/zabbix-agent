@@ -1,0 +1,13 @@
+---
+
+ - name: "Debian | Installing repository Debian"
+   apt_repository: repo="deb http://repo.zabbix.com/zabbix/3.0/debian/ {{ ansible_distribution_release }} main" state=present
+
+ - name: "Debian | Install gpg key"
+   apt_key: id=79EA5ED4 url=http://repo.zabbix.com/zabbix-official-repo.key
+
+ - name: Flush Cache of Apt repository
+   apt: update_cache=yes
+
+ - name: Install Zabbix Agent
+   apt:  name=zabbix-agent state=present

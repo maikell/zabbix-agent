@@ -1,0 +1,7 @@
+---
+- hosts: server
+  become: yes
+  vars:
+   server_ipadress: "127.0.0.1"
+  roles:
+    - zabbix-agent

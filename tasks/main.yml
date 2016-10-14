@@ -1,0 +1,20 @@
+---
+ - include: centos.yml
+   when: ansible_os_family == "RedHat"
+
+ - include: debian.yml
+   when: ansible_os_family == "Debian"
+
+ - name: Upload zabbix_agent.conf file
+   template : src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agentd.conf owner=root group=root mode=0644
+   register: zabbixconfig
+
+ - name: Make sure the Zabbix agent is enabled as service
+   service: name=zabbix-agent enabled=yes
+
+ - name: Make sure the Zabbix agent is started
+   service: name=zabbix-agent state=started
+
+ - name: Restarted the Zabbix agent after the config diff 
+   service: name=zabbix-agent state=restarted
+   when: zabbixconfig.changed
